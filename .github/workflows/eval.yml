@@ -22,12 +22,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dir: [dir{10..999}]
+        dir: [ 
+          # './59', 
+          './112', 
+          # './113', 
+          './145', 
+          # './156'
+        ]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Run tests
+      - name: Run eval
         run: |
           cd ${{ matrix.dir }}
           go build -o ${{ matrix.dir }}
