@@ -1,0 +1,34 @@
+name: Evaluate
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Hyperfine
+        run: |
+          brew install hyperfine
+
+  eval:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dir: [dir{10..999}]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        run: |
+          cd ${{ matrix.dir }}
+          go build -o ${{ matrix.dir }}
+          hyperfine --warmup 3 --min-runs 10 "./${{ matrix.dir }}"
