@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 for dir in ./[0-9]* ; do
     if [ -d "$dir" ]; then
 
