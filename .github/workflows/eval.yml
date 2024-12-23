@@ -24,6 +24,7 @@ jobs:
 
   eval:
     runs-on: ubuntu-latest
+    needs: build
     strategy:
       matrix:
         dir: [ 
