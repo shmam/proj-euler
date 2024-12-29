@@ -9,6 +9,10 @@ on:
 jobs:
   eval:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ matrix.dir }}
     strategy:
       matrix:
         dir: [ 
@@ -19,12 +23,11 @@ jobs:
           './156'
         ]
     steps:
-          
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: checkout repo
+        uses: actions/checkout@v4
 
-      - name: Run eval
-        run: |
-          cd ${{ matrix.dir }}
-          go build -o ${{ matrix.dir }}
-          ./${{ matrix.dir }}
+      - name: build go executable
+        run: go build -o ${{ matrix.dir }}
+
+      - name: eval executable
+        run: ${{ matrix.dir }}
