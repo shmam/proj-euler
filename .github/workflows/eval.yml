@@ -22,6 +22,7 @@ jobs:
           './145', 
           './156'
         ]
+    timeout-minutes: 60
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
