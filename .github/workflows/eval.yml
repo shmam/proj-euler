@@ -16,16 +16,9 @@ jobs:
           './112', 
           # './113', 
           './145', 
-          # './156'
+          './156'
         ]
     steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-
-      - name: Install Hyperfine
-        run: |
-          brew install hyperfine
           
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -34,4 +27,4 @@ jobs:
         run: |
           cd ${{ matrix.dir }}
           go build -o ${{ matrix.dir }}
-          hyperfine --warmup 3 --min-runs 10 "./${{ matrix.dir }}"
+          ./${{ matrix.dir }}
